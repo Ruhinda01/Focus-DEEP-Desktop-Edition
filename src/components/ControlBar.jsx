@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ControlBar = ({ startTimer, stopTimer, resetTimer }) => {
   return (
-    <div>
+    <div className="flex flex-row space-x-14 text-white text-xl sm:text-xl md:text-2xl xl:text-3xl 2xl:text-4xl">
       <button onClick={startTimer}>
         <FontAwesomeIcon icon="fa-solid fa-play" />
       </button>

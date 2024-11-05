@@ -57,20 +57,20 @@ const Timer = () => {
 
   
   return (
-    <div>
-        <div>
-            <span>{session}</span>
-        </div>
-        <div>
-            <span>{formattedHour}</span>
-            <span>:</span>
-            <span>{formattedMinute}</span>
-            <span>:</span>
-            <span>{formattedSeconds}</span>
-        </div>
-        <div>
-            <ControlBar startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} />
-        </div>
+    <div className="flex flex-col items-center space-y-4">
+      <div className={`inline-block text-center mt-4 mb-8 ${session === "DEEP FOCUS" ? "text-teal-300" : "text-purple-200"}`}>
+          <span className="text-lg sm:text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-bebas-neue font-normal">{session}</span>
+      </div>
+      <div className="w-full flex flex-row justify-center items-center text-white font-bebas-neue text-[80px] sm:text-[220px] sm:gap-5 leading-none xl:text-[300px]">
+        <span>{formattedHour}</span>
+        <span className="flex self-center mb-4 sm:mb-10">:</span>
+        <span>{formattedMinute}</span>
+        <span className="flex self-center mb-4 sm:mb-10">:</span>
+        <span>{formattedSeconds}</span>
+      </div>
+      <div>
+          <ControlBar startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} />
+      </div>
     </div>
   );
 };
