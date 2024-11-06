@@ -68,8 +68,9 @@ const Timer = () => {
         <span className="flex self-center mb-4 sm:mb-10">:</span>
         <span>{formattedSeconds}</span>
       </div>
-      <div>
-          <ControlBar startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} />
+      <div className="relative">
+        <div className="absolute inset-0 rounded-full bg-purple-600/20 blur-xl"></div>
+        <ControlBar startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} />
       </div>
     </div>
   );
