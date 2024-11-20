@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Timer from "./components/Timer";
 import Footer from "./components/Footer";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -11,7 +11,19 @@ const App = () => {
   const [showInfo, setShowInfo] = useState(false);
   const handleToggleInfo = () => {
     setShowInfo(!showInfo);
-  }
+  };
+
+  useEffect(() => {
+    window.addEventListener("offline", () => {
+      // Handle offline state
+      console.log("Application is offline");
+    });
+
+    window.addEventListener("online", () => {
+      // Handle online state
+      console.log("Application is online");
+    });
+  }, []);
   return (
     <div className="flex flex-col min-h-screen">
       <header className="flex flex-row items-start m-4 xl:m-8">

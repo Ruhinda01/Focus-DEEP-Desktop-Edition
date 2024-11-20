@@ -16,7 +16,9 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "vite-plugin-pwa": "^0.21.0",
+    "workbox-webpack-plugin": "^7.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
