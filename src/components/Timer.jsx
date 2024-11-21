@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ControlBar from "./ControlBar";
 
 
@@ -6,6 +6,20 @@ const Timer = () => {
   const [session, setSession] = useState("DEEP FOCUS");
   const [hourValue, setHourValue] = useState(1 * 60 * 60);
   const [isRunning, setIsRunning] = useState(false);
+
+  // created audio refs with fixed volume and paths
+  const focusEndSound = useRef(null);
+  const restEndSound = useRef(null);
+
+  // Initialize audio elements with fixed volume
+  useEffect(() => {
+      focusEndSound.current = new Audio('/sounds/chime-sound-7143.mp3');
+      restEndSound.current = new Audio('/sounds/gong-255733.mp3');
+
+      // set fixed volume for both sounds (0.5 = 50% volume)
+      focusEndSound.current.volume = 0.5;
+      restEndSound.current.volume = 0.5;
+  }, []);
   // getting the individual hours, minutes, and seconds
   const hour = Math.floor(hourValue / 3600);
   const minute = Math.floor((hourValue % 3600) / 60);
@@ -15,7 +29,19 @@ const Timer = () => {
   const formattedMinute = minute.toString().padStart(2, "0");
   const formattedSeconds = seconds.toString().padStart(2, "0");
 
+
   useEffect(() => {
+    const playSessionSound = () => {
+      try {
+        if (session === "DEEP FOCUS") {
+          focusEndSound.current.play();
+        } else if (session === "REST") {
+          restEndSound.current.play();
+        }
+      } catch (error) {
+        console.error("Error playing audio:", error);
+      }
+    };
     let interval;
     if (isRunning && hourValue > 0) {
         interval = setInterval(() => {
@@ -23,6 +49,7 @@ const Timer = () => {
         }, 1000);
     } else if (hourValue === 0) {
         setIsRunning(false);
+        playSessionSound();
         if (session === "DEEP FOCUS") {
             setSession("REST");
             setHourValue(25 * 60);

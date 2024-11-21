@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['apple-touch-icon.png', 'favicon-32x32.png', 'favicon-16x16.png'],
+      includeAssets: ['apple-touch-icon.png', 'favicon-32x32.png', 'favicon-16x16.png', 'sounds/*.mp3'],
       manifest: {
         name: 'FOCUS',
         short_name: 'FOCUS',
@@ -36,7 +36,7 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,ttf,woff,woff2}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,ttf,woff,woff2,mp3}'],
         runtimeCaching: [{
           urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
           handler: 'CacheFirst',
@@ -59,6 +59,20 @@ export default defineConfig({
             expiration: {
               maxEntries: 20,
               maxAgeSeconds: 60 * 60 * 24 * 365
+            },
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        },
+        {
+          urlPattern: /\.(mp3|wav)$/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'audio-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 30 // Cache for 30 days
             },
             cacheableResponse: {
               statuses: [0, 200]
