@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'bebas-neue': ['Bebas Neue', 'cursive'],
-        'outfit': ['Outfit', 'sans-serif'],
+        'bebas-neue': ['Bebas Neue', 'sans-serif'],
+        'outfit': ['Outfit', 'system-ui', 'sans-serif'],
       },
     },
   },

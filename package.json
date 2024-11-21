@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "serve": "port=4433 serve dist",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

@@ -13,7 +13,10 @@ export default defineConfig({
         name: 'FOCUS',
         short_name: 'FOCUS',
         description: 'Deep work timer application',
+        display: 'standalone',
         theme_color: '#1a1a1a',
+        background_color: '#1a1a1a',
+        start_url: '/',
         icons: [
           {
             src: '/favicon-16x16.png',
@@ -33,7 +36,7 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,ttf,woff,woff2}'],
         runtimeCaching: [{
           urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
           handler: 'CacheFirst',
@@ -41,6 +44,20 @@ export default defineConfig({
             cacheName: 'google-fonts-cache',
             expiration: {
               maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365
+            },
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        },
+        {
+          urlPattern: /\.(ttf|otf|woff|woff2)$/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'local-fonts-cache',
+            expiration: {
+              maxEntries: 20,
               maxAgeSeconds: 60 * 60 * 24 * 365
             },
             cacheableResponse: {
